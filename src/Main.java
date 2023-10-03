@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-	public static int getUserInt(Scanner scanner) {
+	private static int getUserInt(Scanner scanner) {
 		while (true) {
 			try {
 				return scanner.nextInt();
@@ -15,7 +15,7 @@ public class Main {
 		}
 	}
 
-	public static double getUserDouble(Scanner scanner) {
+	private static double getUserDouble(Scanner scanner) {
 		while (true) {
 			try {
 				return scanner.nextDouble();
@@ -26,13 +26,13 @@ public class Main {
 		}
 	}
 
-	public static void search(Scanner scanner, MusicAlbumCollection albumCollection) {
+	private static void search(Scanner scanner, MusicAlbumCollection albumCollection) {
 		System.out.print("Enter a phrase to search for: ");
 		String title = scanner.nextLine();
 		albumCollection.search(title);
 	}
 
-	public static void inputItems(Scanner scanner, MusicAlbumCollection albumCollection) {
+	private static void inputItems(Scanner scanner, MusicAlbumCollection albumCollection) {
 		System.out.println("Adding new albums to the collection. Enter 'stop' to finish.");
 		while (true) {
 			System.out.print("Enter album title: ");
