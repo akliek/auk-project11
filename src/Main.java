@@ -4,7 +4,11 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-	private static int getUserInt(Scanner scanner) {
+	private static MusicAlbumCollection albumCollection;
+
+	private static Scanner scanner;
+
+	private static int getUserInt() {
 		while (true) {
 			try {
 				return scanner.nextInt();
@@ -15,7 +19,7 @@ public class Main {
 		}
 	}
 
-	private static double getUserDouble(Scanner scanner) {
+	private static double getUserDouble() {
 		while (true) {
 			try {
 				return scanner.nextDouble();
@@ -26,13 +30,13 @@ public class Main {
 		}
 	}
 
-	private static void search(Scanner scanner, MusicAlbumCollection albumCollection) {
+	private static void search() {
 		System.out.print("Enter a phrase to search for: ");
 		String title = scanner.nextLine();
 		albumCollection.search(title);
 	}
 
-	private static void inputItems(Scanner scanner, MusicAlbumCollection albumCollection) {
+	private static void inputItems() {
 		System.out.println("Adding new albums to the collection. Enter 'stop' to finish.");
 		while (true) {
 			System.out.print("Enter album title: ");
@@ -45,11 +49,11 @@ public class Main {
 			String artist = scanner.nextLine();
 
 			System.out.print("Enter release year: ");
-			int releaseYear = getUserInt(scanner);
+			int releaseYear = getUserInt();
 			scanner.nextLine(); // Consume newline character
 
 			System.out.print("Enter album price: ");
-			double price = getUserDouble(scanner);
+			double price = getUserDouble();
 			scanner.nextLine(); // Consume newline character
 
 			MusicAlbum newAlbum = new MusicAlbum(title, artist, releaseYear, price);
@@ -57,27 +61,27 @@ public class Main {
 		}
 	}
 
-	private static void searchByYear(Scanner scanner, MusicAlbumCollection albumCollection) {
+	private static void searchByYear() {
 		System.out.print("Enter release year to search for albums: ");
-		int year = getUserInt(scanner);
+		int year = getUserInt();
 		scanner.nextLine(); // Consume newline character
 		albumCollection.searchByProperty(year);
 	}
 
-	private static void removeItem(Scanner scanner, MusicAlbumCollection albumCollection) {
+	private static void removeItem() {
 		System.out.print("Enter index of album to remove: ");
-		int index = getUserInt(scanner);
+		int index = getUserInt();
 		scanner.nextLine(); // Consume newline character
 		albumCollection.remove(index);
 	}
 
-	private static void readFromFile(Scanner scanner, MusicAlbumCollection albumCollection) {
+	private static void readFromFile() {
 		System.out.print("Enter file name to read from: ");
 		String fileName = scanner.nextLine();
 		albumCollection.readFromFile(fileName);
 	}
 
-	private static void saveToFile(Scanner scanner, MusicAlbumCollection albumCollection) {
+	private static void saveToFile() {
 		System.out.print("Enter file name to save to: ");
 		String fileName = scanner.nextLine();
 		albumCollection.saveToFile(fileName);
@@ -98,8 +102,8 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		MusicAlbumCollection albumCollection = new MusicAlbumCollection();
+		scanner = new Scanner(System.in);
+		albumCollection = new MusicAlbumCollection();
 
 		System.out.println("Welcome to the music album database!");
 		int choice;
@@ -107,22 +111,22 @@ public class Main {
 		do {
 			printMenu();
 
-			choice = getUserInt(scanner);
+			choice = getUserInt();
 			scanner.nextLine(); // Consume newline character
 
 			switch (choice) {
-				case 1 -> inputItems(scanner, albumCollection);
+				case 1 -> inputItems();
 				case 2 -> albumCollection.printList();
 				case 3 -> {
 					albumCollection.sort();
 					System.out.println("Albums sorted by release year.");
 				}
-				case 4 -> search(scanner, albumCollection);
-				case 5 -> searchByYear(scanner, albumCollection);
-				case 6 -> removeItem(scanner, albumCollection);
+				case 4 -> search();
+				case 5 -> searchByYear();
+				case 6 -> removeItem();
 				case 7 -> albumCollection.print();
-				case 8 -> readFromFile(scanner, albumCollection);
-				case 9 -> saveToFile(scanner, albumCollection);
+				case 8 -> readFromFile();
+				case 9 -> saveToFile();
 				case 0 -> System.out.println("Exiting the program.");
 				default -> System.out.println("Invalid choice. Please choose a valid option.");
 			}
