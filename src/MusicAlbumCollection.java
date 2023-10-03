@@ -129,18 +129,12 @@ public class MusicAlbumCollection {
 	// Method to save the collection to a file
 	public void saveToFile(String path) {
 		try {
-			// Create a FileWriter object with the specified file path
 			FileWriter fileWriter = new FileWriter(path);
-
-			// Create a BufferedWriter to write efficiently
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-			// Write the content to the file
 			bufferedWriter.write(getAll());
 
-			// Close the BufferedWriter to flush and release resources
 			bufferedWriter.close();
-
 			System.out.println("Content has been written to the file successfully.");
 		} catch (IOException e) {
 			System.err.println("An error occurred: " + e.getMessage());
